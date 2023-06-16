@@ -70,18 +70,18 @@ defmodule RollingBitesWeb.FoodTruckControllerTest do
   end
 
   describe "index" do
-    test "lists all food_trucks", %{conn: conn} do
-      conn = get(conn, ~p"/api/food_trucks")
+    test "lists all food-trucks", %{conn: conn} do
+      conn = get(conn, ~p"/api/food-trucks")
       assert json_response(conn, 200)["data"] == []
     end
   end
 
   describe "create food_truck" do
     test "renders food_truck when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/api/food_trucks", food_truck: @create_attrs)
+      conn = post(conn, ~p"/api/food-trucks", food_truck: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get(conn, ~p"/api/food_trucks/#{id}")
+      conn = get(conn, ~p"/api/food-trucks/#{id}")
 
       assert %{
                "id" => ^id,
@@ -116,7 +116,7 @@ defmodule RollingBitesWeb.FoodTruckControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, ~p"/api/food_trucks", food_truck: @invalid_attrs)
+      conn = post(conn, ~p"/api/food-trucks", food_truck: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -125,10 +125,10 @@ defmodule RollingBitesWeb.FoodTruckControllerTest do
     setup [:create_food_truck]
 
     test "renders food_truck when data is valid", %{conn: conn, food_truck: %FoodTruck{id: id} = food_truck} do
-      conn = put(conn, ~p"/api/food_trucks/#{food_truck}", food_truck: @update_attrs)
+      conn = put(conn, ~p"/api/food-trucks/#{food_truck}", food_truck: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get(conn, ~p"/api/food_trucks/#{id}")
+      conn = get(conn, ~p"/api/food-trucks/#{id}")
 
       assert %{
                "id" => ^id,
@@ -163,7 +163,7 @@ defmodule RollingBitesWeb.FoodTruckControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, food_truck: food_truck} do
-      conn = put(conn, ~p"/api/food_trucks/#{food_truck}", food_truck: @invalid_attrs)
+      conn = put(conn, ~p"/api/food-trucks/#{food_truck}", food_truck: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -172,11 +172,11 @@ defmodule RollingBitesWeb.FoodTruckControllerTest do
     setup [:create_food_truck]
 
     test "deletes chosen food_truck", %{conn: conn, food_truck: food_truck} do
-      conn = delete(conn, ~p"/api/food_trucks/#{food_truck}")
+      conn = delete(conn, ~p"/api/food-trucks/#{food_truck}")
       assert response(conn, 204)
 
       assert_error_sent 404, fn ->
-        get(conn, ~p"/api/food_trucks/#{food_truck}")
+        get(conn, ~p"/api/food-trucks/#{food_truck}")
       end
     end
   end
