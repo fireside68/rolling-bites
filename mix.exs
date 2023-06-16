@@ -32,13 +32,13 @@ defmodule RollingBites.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:csv, "~> 3.0"},
       {:ecto_sql, "~> 3.10"},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:finch, "~> 0.13"},
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
+      {:nimble_csv, "~> 1.2"},
       {:phoenix, "~> 1.7.3"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.3"},
