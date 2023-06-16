@@ -52,7 +52,7 @@ defmodule RollingBites.FoodTrucks do
   def create_food_truck(attrs \\ %{}) do
     %FoodTruck{}
     |> FoodTruck.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert(on_conflict: :nothing)
   end
 
   @doc """
