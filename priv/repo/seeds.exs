@@ -16,7 +16,7 @@ defmodule RollingBites.Seeds do
     column_names = get_column_names(file_path)
 
     file_path
-    |> File.stream!
+    |> File.stream!()
     |> CSV.parse_stream(skip_headers: true)
     |> Enum.each(fn row ->
       row

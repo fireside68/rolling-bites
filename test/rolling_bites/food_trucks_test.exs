@@ -8,7 +8,35 @@ defmodule RollingBites.FoodTrucksTest do
 
     import RollingBites.FoodTrucksFixtures
 
-    @invalid_attrs %{block: nil, status: nil, address: nil, permit: nil, location: nil, approved: nil, y: nil, x: nil, location_id: nil, facility_type: nil, location_description: nil, blocklot: nil, lot: nil, food_items: nil, latitude: nil, longitude: nil, schedule: nil, days_hours: nil, noi_sent: nil, received: nil, prior_permit: nil, expiration_date: nil, fire_prevention_districts: nil, police_districts: nil, supervisor_districts: nil, zip_codes: nil, neighborhoods: nil}
+    @invalid_attrs %{
+      block: nil,
+      status: nil,
+      address: nil,
+      permit: nil,
+      location: nil,
+      approved: nil,
+      y: nil,
+      x: nil,
+      location_id: nil,
+      facility_type: nil,
+      location_description: nil,
+      blocklot: nil,
+      lot: nil,
+      food_items: nil,
+      latitude: nil,
+      longitude: nil,
+      schedule: nil,
+      days_hours: nil,
+      noi_sent: nil,
+      received: nil,
+      prior_permit: nil,
+      expiration_date: nil,
+      fire_prevention_districts: nil,
+      police_districts: nil,
+      supervisor_districts: nil,
+      zip_codes: nil,
+      neighborhoods: nil
+    }
 
     test "list_food_trucks/0 returns all food_trucks" do
       food_truck = food_truck_fixture()
@@ -21,7 +49,35 @@ defmodule RollingBites.FoodTrucksTest do
     end
 
     test "create_food_truck/1 with valid data creates a food_truck" do
-      valid_attrs = %{block: "some block", status: "some status", address: "some address", permit: "some permit", location: "some location", approved: "some approved", y: "some y", x: "some x", location_id: "some location_id", facility_type: "some facility_type", location_description: "some location_description", blocklot: "some blocklot", lot: "some lot", food_items: "some food_items", latitude: "some latitude", longitude: "some longitude", schedule: "some schedule", days_hours: "some days_hours", noi_sent: "some noi_sent", received: "some received", prior_permit: "some prior_permit", expiration_date: "some expiration_date", fire_prevention_districts: "some fire_prevention_districts", police_districts: "some police_districts", supervisor_districts: "some supervisor_districts", zip_codes: "some zip_codes", neighborhoods: "some neighborhoods"}
+      valid_attrs = %{
+        block: "some block",
+        status: "some status",
+        address: "some address",
+        permit: "some permit",
+        location: "some location",
+        approved: "some approved",
+        y: "some y",
+        x: "some x",
+        location_id: "some location_id",
+        facility_type: "some facility_type",
+        location_description: "some location_description",
+        blocklot: "some blocklot",
+        lot: "some lot",
+        food_items: "some food_items",
+        latitude: "some latitude",
+        longitude: "some longitude",
+        schedule: "some schedule",
+        days_hours: "some days_hours",
+        noi_sent: "some noi_sent",
+        received: "some received",
+        prior_permit: "some prior_permit",
+        expiration_date: "some expiration_date",
+        fire_prevention_districts: "some fire_prevention_districts",
+        police_districts: "some police_districts",
+        supervisor_districts: "some supervisor_districts",
+        zip_codes: "some zip_codes",
+        neighborhoods: "some neighborhoods"
+      }
 
       assert {:ok, %FoodTruck{} = food_truck} = FoodTrucks.create_food_truck(valid_attrs)
       assert food_truck.block == "some block"
@@ -59,9 +115,40 @@ defmodule RollingBites.FoodTrucksTest do
 
     test "update_food_truck/2 with valid data updates the food_truck" do
       food_truck = food_truck_fixture()
-      update_attrs = %{block: "some updated block", status: "some updated status", address: "some updated address", permit: "some updated permit", location: "some updated location", approved: "some updated approved", y: "some updated y", x: "some updated x", location_id: "some updated location_id", facility_type: "some updated facility_type", location_description: "some updated location_description", blocklot: "some updated blocklot", lot: "some updated lot", food_items: "some updated food_items", latitude: "some updated latitude", longitude: "some updated longitude", schedule: "some updated schedule", days_hours: "some updated days_hours", noi_sent: "some updated noi_sent", received: "some updated received", prior_permit: "some updated prior_permit", expiration_date: "some updated expiration_date", fire_prevention_districts: "some updated fire_prevention_districts", police_districts: "some updated police_districts", supervisor_districts: "some updated supervisor_districts", zip_codes: "some updated zip_codes", neighborhoods: "some updated neighborhoods"}
 
-      assert {:ok, %FoodTruck{} = food_truck} = FoodTrucks.update_food_truck(food_truck, update_attrs)
+      update_attrs = %{
+        block: "some updated block",
+        status: "some updated status",
+        address: "some updated address",
+        permit: "some updated permit",
+        location: "some updated location",
+        approved: "some updated approved",
+        y: "some updated y",
+        x: "some updated x",
+        location_id: "some updated location_id",
+        facility_type: "some updated facility_type",
+        location_description: "some updated location_description",
+        blocklot: "some updated blocklot",
+        lot: "some updated lot",
+        food_items: "some updated food_items",
+        latitude: "some updated latitude",
+        longitude: "some updated longitude",
+        schedule: "some updated schedule",
+        days_hours: "some updated days_hours",
+        noi_sent: "some updated noi_sent",
+        received: "some updated received",
+        prior_permit: "some updated prior_permit",
+        expiration_date: "some updated expiration_date",
+        fire_prevention_districts: "some updated fire_prevention_districts",
+        police_districts: "some updated police_districts",
+        supervisor_districts: "some updated supervisor_districts",
+        zip_codes: "some updated zip_codes",
+        neighborhoods: "some updated neighborhoods"
+      }
+
+      assert {:ok, %FoodTruck{} = food_truck} =
+               FoodTrucks.update_food_truck(food_truck, update_attrs)
+
       assert food_truck.block == "some updated block"
       assert food_truck.status == "some updated status"
       assert food_truck.address == "some updated address"
@@ -93,7 +180,10 @@ defmodule RollingBites.FoodTrucksTest do
 
     test "update_food_truck/2 with invalid data returns error changeset" do
       food_truck = food_truck_fixture()
-      assert {:error, %Ecto.Changeset{}} = FoodTrucks.update_food_truck(food_truck, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               FoodTrucks.update_food_truck(food_truck, @invalid_attrs)
+
       assert food_truck == FoodTrucks.get_food_truck!(food_truck.id)
     end
 

@@ -63,7 +63,35 @@ defmodule RollingBitesWeb.FoodTruckControllerTest do
     zip_codes: "some updated zip_codes",
     neighborhoods: "some updated neighborhoods"
   }
-  @invalid_attrs %{block: nil, status: nil, address: nil, permit: nil, location: nil, approved: nil, y: nil, x: nil, location_id: nil, facility_type: nil, location_description: nil, blocklot: nil, lot: nil, food_items: nil, latitude: nil, longitude: nil, schedule: nil, days_hours: nil, noi_sent: nil, received: nil, prior_permit: nil, expiration_date: nil, fire_prevention_districts: nil, police_districts: nil, supervisor_districts: nil, zip_codes: nil, neighborhoods: nil}
+  @invalid_attrs %{
+    block: nil,
+    status: nil,
+    address: nil,
+    permit: nil,
+    location: nil,
+    approved: nil,
+    y: nil,
+    x: nil,
+    location_id: nil,
+    facility_type: nil,
+    location_description: nil,
+    blocklot: nil,
+    lot: nil,
+    food_items: nil,
+    latitude: nil,
+    longitude: nil,
+    schedule: nil,
+    days_hours: nil,
+    noi_sent: nil,
+    received: nil,
+    prior_permit: nil,
+    expiration_date: nil,
+    fire_prevention_districts: nil,
+    police_districts: nil,
+    supervisor_districts: nil,
+    zip_codes: nil,
+    neighborhoods: nil
+  }
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -124,7 +152,10 @@ defmodule RollingBitesWeb.FoodTruckControllerTest do
   describe "update food_truck" do
     setup [:create_food_truck]
 
-    test "renders food_truck when data is valid", %{conn: conn, food_truck: %FoodTruck{id: id} = food_truck} do
+    test "renders food_truck when data is valid", %{
+      conn: conn,
+      food_truck: %FoodTruck{id: id} = food_truck
+    } do
       conn = put(conn, ~p"/api/food-trucks/#{food_truck}", food_truck: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 

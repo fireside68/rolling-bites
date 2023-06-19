@@ -37,7 +37,59 @@ defmodule RollingBites.FoodTrucks.FoodTruck do
   @doc false
   def changeset(food_truck, attrs) do
     food_truck
-    |> cast(attrs, [:location_id, :facility_type, :location_description, :address, :blocklot, :block, :lot, :permit, :status, :food_items, :x, :y, :latitude, :longitude, :schedule, :days_hours, :noi_sent, :approved, :received, :prior_permit, :expiration_date, :location, :fire_prevention_districts, :police_districts, :supervisor_districts, :zip_codes, :neighborhoods])
-    |> validate_required([:location_id, :facility_type, :address, :blocklot, :block, :lot, :permit, :status, :food_items, :x, :y, :latitude, :longitude, :schedule, :received, :prior_permit, :expiration_date, :location, :fire_prevention_districts, :police_districts, :supervisor_districts, :zip_codes, :neighborhoods])
+    |> cast(attrs, [
+      :location_id,
+      :facility_type,
+      :location_description,
+      :address,
+      :blocklot,
+      :block,
+      :lot,
+      :permit,
+      :status,
+      :food_items,
+      :x,
+      :y,
+      :latitude,
+      :longitude,
+      :schedule,
+      :days_hours,
+      :noi_sent,
+      :approved,
+      :received,
+      :prior_permit,
+      :expiration_date,
+      :location,
+      :fire_prevention_districts,
+      :police_districts,
+      :supervisor_districts,
+      :zip_codes,
+      :neighborhoods
+    ])
+    |> validate_required([
+      :location_id,
+      :facility_type,
+      :address,
+      :blocklot,
+      :block,
+      :lot,
+      :permit,
+      :status,
+      :food_items,
+      :x,
+      :y,
+      :latitude,
+      :longitude,
+      :schedule,
+      :received,
+      :prior_permit,
+      :expiration_date,
+      :location,
+      :fire_prevention_districts,
+      :police_districts,
+      :supervisor_districts,
+      :zip_codes,
+      :neighborhoods
+    ])
   end
 end
