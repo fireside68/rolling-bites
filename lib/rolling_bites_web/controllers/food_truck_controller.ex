@@ -15,7 +15,7 @@ defmodule RollingBitesWeb.FoodTruckController do
     with {:ok, %FoodTruck{} = food_truck} <- FoodTrucks.create_food_truck(food_truck_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/food_trucks/#{food_truck}")
+      |> put_resp_header("location", ~p"/api/food-trucks/#{food_truck}")
       |> render(:show, food_truck: food_truck)
     end
   end
