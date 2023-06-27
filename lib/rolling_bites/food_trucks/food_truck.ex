@@ -2,6 +2,8 @@ defmodule RollingBites.FoodTrucks.FoodTruck do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t :: %__MODULE__{}
+
   schema "food_trucks" do
     field :block, :string
     field :status, :string
