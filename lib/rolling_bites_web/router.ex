@@ -21,10 +21,10 @@ defmodule RollingBitesWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", RollingBitesWeb do
-    pipe_through :api
-    resources "/food-trucks", FoodTruckController, except: [:new, :edit]
-  end
+  # scope "/api", RollingBitesWeb do
+  #   pipe_through :api
+  #   resources "/food-trucks", FoodTruckController, except: [:new, :edit]
+  # end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:rolling_bites, :dev_routes) do
