@@ -8,7 +8,6 @@ defmodule RollingBitesWeb.FoodTruckPresenter do
           description: String.t(),
           latitude: float(),
           longitude: float(),
-          map: String.t(),
           schedule_url: String.t()
         }
 
@@ -19,7 +18,6 @@ defmodule RollingBitesWeb.FoodTruckPresenter do
     :description,
     :latitude,
     :longitude,
-    :map,
     :schedule_url
   ]
 
@@ -35,7 +33,6 @@ defmodule RollingBitesWeb.FoodTruckPresenter do
       description: data["fooditems"],
       latitude: latitude,
       longitude: longitude,
-      map: LeafletHelper.leaflet_javascript(latitude, longitude, name),
       schedule_url: data["schedule"]
     }
   end
