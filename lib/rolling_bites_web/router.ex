@@ -18,6 +18,8 @@ defmodule RollingBitesWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/food_trucks", RollingBitesController, :index
+    get "/food_trucks/:id", RollingBitesController, :show
   end
 
   # Other scopes may use custom stacks.
