@@ -14,9 +14,10 @@ defmodule RollingBitesWeb.FoodTruckClient do
     |> do_get()
   end
 
-  @spec fetch_by_id(String.t()) :: {:ok, any()} | {:error, any()}
+  @spec fetch_by_id(String.t() | integer()) :: {:ok, any()} | {:error, any()}
+  def fetch_by_id(id) when is_binary(id), do: fetch_by_id(String.to_integer(id))
   def fetch_by_id(id) do
-    base_url() <> "?objectid=#{String.to_integer(id)}"
+    (base_url() <> "?objectid=#{id}")
     |> do_get()
   end
 
