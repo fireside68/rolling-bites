@@ -1,0 +1,12 @@
+<!-- For /food_trucks -->
+<.table id="food-trucks" rows={@trucks}>
+  <:col :let={truck} label="ID">
+    <.link navigate={~p"/food_trucks/#{truck.id}"}><%= truck.id %></.link>
+  </:col>
+  <:col :let={truck} label="Name"><%= truck.name %></:col>
+  <:col :let={truck} label="Address"><%= truck.address %></:col>
+  <:col :let={truck} label="Description"><%= truck.description %></:col>
+  <:col :let={truck}>
+    <.link navigate={truck.schedule_url}>Schedule</.link> (PDF)
+  </:col>
+</.table>

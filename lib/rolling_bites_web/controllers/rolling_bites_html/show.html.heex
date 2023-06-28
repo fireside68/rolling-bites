@@ -1,0 +1,9 @@
+<!-- For /food_trucks/:id -->
+<div id="map"></div>
+<div class="food-truck">
+  <h2><%= @truck.name %></h2>
+  <p><%= @truck.address %></p>
+  <p><%= @truck.description %></p>
+  <.link navigate={@truck.schedule_url}>Schedule</.link>
+</div>
+<%= @truck.map %>
