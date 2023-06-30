@@ -12,7 +12,6 @@ defmodule RollingBitesWeb.RollingBitesController do
 
   def show(conn, params) do
     {:ok, data} = FoodTruckClient.fetch_by_id(params["id"])
-    IO.inspect(data)
 
     truck =
       List.first(data)

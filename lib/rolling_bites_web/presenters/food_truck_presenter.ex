@@ -31,8 +31,8 @@ defmodule RollingBitesWeb.FoodTruckPresenter do
       name: name,
       address: data["address"],
       description: data["fooditems"],
-      latitude: latitude,
-      longitude: longitude,
+      latitude: Float.to_string(latitude),
+      longitude: Float.to_string(longitude),
       schedule_url: data["schedule"]
     }
   end
