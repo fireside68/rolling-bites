@@ -1,5 +1,5 @@
 defmodule RollingBitesWeb.FoodTruckPresenter do
-  alias RollingBitesWeb.LeafletHelper
+  alias RollingBitesWeb.FoodTruckHelper
 
   @type t :: %__MODULE__{
           id: String.t(),
@@ -22,25 +22,14 @@ defmodule RollingBitesWeb.FoodTruckPresenter do
   ]
 
   def from_api_data(data) do
-    latitude = parse_map_point(data["latitude"])
-    longitude = parse_map_point(data["longitude"])
-    name = data["applicant"]
-
     %__MODULE__{
       id: data["objectid"],
-      name: name,
+      name: data["applicant"],
       address: data["address"],
-      description: data["fooditems"],
-      latitude: Float.to_string(latitude),
-      longitude: Float.to_string(longitude),
+      description: FoodTruckHelper.parse_food_items(data["fooditems"]),
+      latitude: data["latitude"],
+      longitude: data["longitude"],
       schedule_url: data["schedule"]
     }
-  end
-
-  defp parse_map_point(map_point) do
-    case Float.parse(map_point) do
-      {float, ""} -> float
-      :error -> String.to_integer(map_point)
-    end
   end
 end
