@@ -9,9 +9,9 @@
   >
   </div>
 </section>
-<div class="food-truck">
-  <h2><%= @truck.name %></h2>
-  <p><%= @truck.address %></p>
+<div class="food-truck my-16">
+  <h2 class="lg:text-5xl md:text-5xl sm:text-3xl"><%= @truck.name %></h2>
+  <p class="text-lg"><%= @truck.address %></p>
   <p><%= @truck.description %></p>
   <.link navigate={@truck.schedule_url}>Schedule</.link>
 </div>
