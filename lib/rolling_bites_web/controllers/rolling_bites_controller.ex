@@ -5,9 +5,7 @@ defmodule RollingBitesWeb.RollingBitesController do
   alias RollingBitesWeb.FoodTruckPresenter
 
   def index(conn, _params) do
-    {:ok, data} = FoodTruckClient.fetch_all_data()
-    trucks = Enum.map(data, &FoodTruckPresenter.from_api_data/1)
-    render(conn, "index.html", trucks: trucks)
+    render(conn, "index.html")
   end
 
   def show(conn, params) do

@@ -1,5 +1,5 @@
 <!-- For /food_trucks -->
-<.table id="food-trucks" rows={@trucks}>
+<.table id="food-trucks" rows={@conn.assigns.trucks}>
   <:col :let={truck} label="ID">
     <.link navigate={~p"/food_trucks/#{truck.id}"}><%= truck.id %></.link>
   </:col>
