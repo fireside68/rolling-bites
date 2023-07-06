@@ -6,6 +6,7 @@ defmodule RollingBitesWeb.ApiCallPlug do
     data. If the key is present and properly filled, the conn passes through
     untouched.
   """
+  require Logger
 
   @behaviour Plug
 
@@ -18,10 +19,13 @@ defmodule RollingBitesWeb.ApiCallPlug do
 
   @spec call(Conn.t(), Keyword.t()) :: Conn.t()
   def call(%{assigns: %{trucks: trucks}} = conn, _opts) do
+    Logger.info("Checking trucks data...")
     case trucks do
       nil -> call_api_and_assign_data(conn)
       [] -> call_api_and_assign_data(conn)
-      _ -> conn
+      _ ->
+        Logger.info("Datat all good!")
+        conn
     end
   end
 
