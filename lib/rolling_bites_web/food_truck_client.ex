@@ -1,6 +1,7 @@
 defmodule RollingBitesWeb.FoodTruckClient do
   @behaviour RollingBitesWeb.FoodTruckClientBehaviour
   use HTTPoison.Base
+  require Logger
 
   alias HTTPoison.Response
 
@@ -33,17 +34,21 @@ defmodule RollingBitesWeb.FoodTruckClient do
   defp handle_response(response) do
     case response do
       {:ok, %Response{status_code: 200, body: body}} ->
+        Logger.info("Data retrieval was successful")
         {:ok, Jason.decode!(body)}
 
       {:ok, %Response{status_code: status, body: body}} ->
+        Logger.error("Unexpected status #{status}: #{body}")
         {:error, "Unexpected status #{status}: #{body}"}
 
       {:error, error} ->
+        Logger.error("Failed to fetch data: #{inspect(error)}")
         {:error, "Failed to fetch data: #{inspect(error)}"}
     end
   end
 
   defp do_get(url) do
+    Logger.info("Connecting to SODA API")
     url
     |> http_client().get(headers())
     |> handle_response()
