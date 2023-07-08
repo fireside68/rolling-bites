@@ -20,7 +20,11 @@ defmodule RollingBitesWeb.Router do
 
     get "/", PageController, :home
     get "/food_trucks", RollingBitesController, :index
-    get "/food_trucks/:id", RollingBitesController, :show
+    get "/food_trucks/:name", RollingBitesController, :show
+
+    live "/trucks/show/:name", FoodTruckShowLive
+    live "/trucks/detail", FoodTruckDetailLive
+    live "/trucks", FoodTruckIndexLive
   end
 
   # Other scopes may use custom stacks.
