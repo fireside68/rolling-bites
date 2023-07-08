@@ -3,7 +3,6 @@ import L from "leaflet"
 const Map = {
   mounted() {
     this.handleEvent('coordinates_update', ({latitude, longitude, name}) => this.renderMap(latitude, longitude, name))
-    // Rest of your code...
   },
   updated() {
     this.renderMap(this.el.dataset.lat, this.el.dataset.lng, this.el.dataset.name)
