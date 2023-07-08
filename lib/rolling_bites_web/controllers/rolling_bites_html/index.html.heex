@@ -1,12 +1,6 @@
 <!-- For /food_trucks -->
 <.table id="food-trucks" rows={@conn.assigns.trucks}>
-  <:col :let={truck} label="ID">
-    <.link navigate={~p"/food_trucks/#{truck.id}"}><%= truck.id %></.link>
-  </:col>
-  <:col :let={truck} label="Name"><%= truck.name %></:col>
-  <:col :let={truck} label="Address"><%= truck.address %></:col>
-  <:col :let={truck} label="Description"><%= truck.description %></:col>
-  <:col :let={truck}>
-    <.link navigate={truck.schedule_url}>Schedule</.link> (PDF)
+  <:col :let={truck} label="Name">
+    <.link navigate={~p"/trucks/show/#{truck.name}"}><%= truck.name %></.link>
   </:col>
 </.table>
