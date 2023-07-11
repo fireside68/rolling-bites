@@ -4,6 +4,7 @@ defmodule RollingBitesWeb.Components.TruckComponent do
   attr :latitude, :string
   attr :longitude, :string
   attr :name, :string
+
   def map(assigns) do
     ~H"""
     <section id="leaflet-map" class="row">

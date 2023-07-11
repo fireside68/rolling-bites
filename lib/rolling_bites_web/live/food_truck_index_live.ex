@@ -32,10 +32,11 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
     """
   end
 
-    # Fetches the truck data from the API
-    def fetch_items do
-      {:ok, data} = FoodTruckClient.fetch_all_data()
-      Enum.map(data, &FoodTruckPresenter.from_api_data/1)
-      |> FoodTruckHelper.group_and_sort_trucks()
-    end
+  # Fetches the truck data from the API
+  def fetch_items do
+    {:ok, data} = FoodTruckClient.fetch_all_data()
+
+    Enum.map(data, &FoodTruckPresenter.from_api_data/1)
+    |> FoodTruckHelper.group_and_sort_trucks()
+  end
 end

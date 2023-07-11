@@ -30,7 +30,9 @@ defmodule RollingBitesWeb.ApiCallPlugTest do
       assert %{assigns: %{trucks: _}} = ApiCallPlug.call(conn, @opts)
     end
 
-    test "calls the API and assigns the data if the :trucks key is present but empty", %{data: data} do
+    test "calls the API and assigns the data if the :trucks key is present but empty", %{
+      data: data
+    } do
       expected_response(data)
 
       conn = conn(:get, "/")
@@ -43,6 +45,7 @@ defmodule RollingBitesWeb.ApiCallPlugTest do
       trucks =
         Jason.decode!(data)
         |> Enum.map(&FoodTruckPresenter.from_api_data/1)
+
       conn =
         conn(:get, "/")
         |> assign(:trucks, trucks)
@@ -53,6 +56,6 @@ defmodule RollingBitesWeb.ApiCallPlugTest do
 
   defp expected_response(data) do
     HTTPClientMock
-      |> expect(:get, fn _url, _headers -> response(data) end)
+    |> expect(:get, fn _url, _headers -> response(data) end)
   end
 end

@@ -15,15 +15,20 @@ defmodule RollingBitesWeb.ApiCallPlug do
   alias RollingBitesWeb.FoodTruckHelper
   alias RollingBitesWeb.FoodTruckPresenter
 
-  @spec init(Keyword.t()) ::Keyword.t()
+  @spec init(Keyword.t()) :: Keyword.t()
   def init(opts), do: opts
 
   @spec call(Conn.t(), Keyword.t()) :: Conn.t()
   def call(%{assigns: %{trucks: trucks}} = conn, _opts) do
     Logger.info("Checking trucks data...")
+
     case trucks do
-      nil -> call_api_and_assign_data(conn)
-      [] -> call_api_and_assign_data(conn)
+      nil ->
+        call_api_and_assign_data(conn)
+
+      [] ->
+        call_api_and_assign_data(conn)
+
       _ ->
         Logger.info("Data all good!")
         conn
@@ -35,6 +40,7 @@ defmodule RollingBitesWeb.ApiCallPlug do
   @spec call_api_and_assign_data(Conn.t()) :: Conn.t()
   defp call_api_and_assign_data(conn) do
     {:ok, data} = FoodTruckClient.fetch_all_data()
+
     trucks =
       Enum.map(data, &FoodTruckPresenter.from_api_data/1)
       |> FoodTruckHelper.group_and_sort_trucks()

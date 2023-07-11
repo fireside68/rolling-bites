@@ -1,7 +1,7 @@
 defmodule RollingBitesWeb.FoodTruckHelper do
-
   @spec parse_food_items(nil | String.t()) :: String.t()
   def parse_food_items(nil), do: ""
+
   def parse_food_items(food_items) do
     case String.contains?(food_items, ":") do
       true -> process_food_items(food_items)
@@ -18,7 +18,7 @@ defmodule RollingBitesWeb.FoodTruckHelper do
   def group_and_sort_trucks(truck_data) do
     truck_data =
       truck_data
-      |> Enum.group_by(&(&1.name))
+      |> Enum.group_by(& &1.name)
       |> Enum.sort()
 
     Enum.map(truck_data, fn {name, entities} ->

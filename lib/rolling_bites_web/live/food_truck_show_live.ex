@@ -3,24 +3,42 @@ defmodule RollingBitesWeb.FoodTruckShowLive do
   alias RollingBitesWeb.FoodTruckIndexLive
 
   def mount(%{"name" => name} = _params, _session, socket) do
-    item = Enum.find(FoodTruckIndexLive.fetch_items(), fn list_item -> list_item.name == URI.decode(name) end)
+    item =
+      Enum.find(FoodTruckIndexLive.fetch_items(), fn list_item ->
+        list_item.name == URI.decode(name)
+      end)
+
     socket =
       socket
-      |> assign([current_item: item, current_item_name: item.name, current_item_entities: item.entities, map_stuff: %{latitude: "37.7598", longitude: "-122.4271", name: "Dolores Park"}])
-      |> push_event("coordinates_update", %{latitude: "37.7598", longitude: "-122.4271", name: "Dolores Park"})
+      |> assign(
+        current_item: item,
+        current_item_name: item.name,
+        current_item_entities: item.entities,
+        map_stuff: %{latitude: "37.7598", longitude: "-122.4271", name: "Dolores Park"}
+      )
+      |> push_event("coordinates_update", %{
+        latitude: "37.7598",
+        longitude: "-122.4271",
+        name: "Dolores Park"
+      })
+
     {:ok, socket}
   end
 
-  def handle_event("show-on-map",
-    %{
-      "latitude" => latitude,
-      "longitude" => longitude,
-      "name" => name
-      } = _params, socket) do
+  def handle_event(
+        "show-on-map",
+        %{
+          "latitude" => latitude,
+          "longitude" => longitude,
+          "name" => name
+        } = _params,
+        socket
+      ) do
     socket =
-       socket
-       |> assign(map_stuff: %{latitude: latitude, longitude: longitude, name: name})
-       |> push_event("coordinates_update", %{latitude: latitude, longitude: longitude, name: name})
+      socket
+      |> assign(map_stuff: %{latitude: latitude, longitude: longitude, name: name})
+      |> push_event("coordinates_update", %{latitude: latitude, longitude: longitude, name: name})
+
     {:noreply, socket}
   end
 
@@ -30,7 +48,9 @@ defmodule RollingBitesWeb.FoodTruckShowLive do
       <h1><%= @map_stuff.name %></h1>
     </div>
     <section>
-      <h4>Map opens to Dolores Park. Click any of the listed food truck locations to render its map point.</h4>
+      <h4>
+        Map opens to Dolores Park. Click any of the listed food truck locations to render its map point.
+      </h4>
     </section>
     <section id="leaflet-map" class="row" phx-update="ignore">
       <div
@@ -53,7 +73,12 @@ defmodule RollingBitesWeb.FoodTruckShowLive do
       </thead>
       <tbody>
         <%= for entity <- @current_item.entities do %>
-          <tr phx-click="show-on-map" phx-value-latitude={entity.latitude} phx-value-longitude={entity.longitude} phx-value-name={entity.name}>
+          <tr
+            phx-click="show-on-map"
+            phx-value-latitude={entity.latitude}
+            phx-value-longitude={entity.longitude}
+            phx-value-name={entity.name}
+          >
             <td><%= entity.id %></td>
             <td><%= entity.name %></td>
             <td><%= entity.address %></td>
