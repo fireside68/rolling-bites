@@ -1,20 +1,13 @@
 defmodule RollingBitesWeb.RollingBitesController do
   use RollingBitesWeb, :controller
 
-  alias RollingBitesWeb.FoodTruckClient
-  alias RollingBitesWeb.FoodTruckPresenter
-
   def index(conn, _params) do
     render(conn, "index.html")
   end
 
-  def show(conn, params) do
-    {:ok, data} = FoodTruckClient.fetch_by_id(params["id"])
-
-    truck =
-      List.first(data)
-      |> FoodTruckPresenter.from_api_data()
-
-    render(conn, "show.html", truck: truck)
+  def show(%{assigns: %{trucks: trucks}} = conn, params) do
+    truck_name = params["name"]
+    truck = Enum.find(trucks, fn map -> %{name: ^truck_name} = map end)
+    render(conn, "show.html", name: truck.name, entities: truck.entities)
   end
 end

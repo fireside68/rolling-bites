@@ -1,17 +1,10 @@
 <!-- For /food_trucks/:id -->
-<section id="leaflet-map" class="row" phx-update="ignore">
-  <div
-    id="map"
-    phx-hook="Map"
-    data-lat={@truck.latitude}
-    data-lng={@truck.longitude}
-    data-name={@truck.name}
-  >
-  </div>
-</section>
-<div class="food-truck my-16">
-  <h2 class="lg:text-5xl md:text-5xl sm:text-3xl"><%= @truck.name %></h2>
-  <p class="text-lg"><%= @truck.address %></p>
-  <p><%= @truck.description %></p>
-  <.link navigate={@truck.schedule_url}>Schedule</.link>
+<div class="entities-table my-16">
+  <.table id="entities" rows={@entities}>
+    <:col :let={entity} label="Address"><%= entity.address %></:col>
+    <:col :let={entity} label="Description"><%= entity.description %></:col>
+    <:col :let={entity} label="Schedule (PDF}">
+      <.link navigate={entity.schedule_url}>link</.link>
+    </:col>
+  </.table>
 </div>

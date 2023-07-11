@@ -49,6 +49,7 @@ defmodule RollingBitesWeb.FoodTruckClient do
 
   defp do_get(url) do
     Logger.info("Connecting to SODA API")
+
     url
     |> http_client().get(headers())
     |> handle_response()
