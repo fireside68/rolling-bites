@@ -45,9 +45,9 @@ defmodule RollingBitesWeb.FoodTruckShowLive do
   def render(assigns) do
     ~H"""
     <div id="header">
-      <h1><%= @map_stuff.name %></h1>
+      <h1 class="text-5xl text-center m-16"><%= @map_stuff.name %></h1>
     </div>
-    <section>
+    <section class="my-8">
       <h4>
         Map opens to Dolores Park. Click any of the listed food truck locations to render its map point.
       </h4>
@@ -62,7 +62,7 @@ defmodule RollingBitesWeb.FoodTruckShowLive do
       >
       </div>
     </section>
-    <table>
+    <table class="table-auto mt-20">
       <thead>
         <tr>
           <th>ID</th>
