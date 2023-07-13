@@ -13,6 +13,19 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
     {:noreply, push_redirect(socket, to: "/trucks/show/#{name}")}
   end
 
+
+  def handle_info(:after_mount, socket) do
+    case fetch_user_location() do
+      {:ok, location} ->
+        closest_trucks = fetch_closest_trucks(location)
+        {:noreply, assign(socket, items: closest_trucks)}
+
+      {:error, reason} ->
+        # Handle error, e.g., show an error message on the page
+        {:noreply, socket}
+    end
+  end
+
   def render(assigns) do
     ~H"""
     <table>
@@ -30,6 +43,17 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
       </tbody>
     </table>
     """
+  end
+
+  defp fetch_user_location do
+    # Logic to fetch the user's location
+    case GeoIP2.lookup_user_location() do
+      {:ok, location} ->
+        {:ok, location}
+
+      {:error, reason} ->
+        {:error, reason}
+    end
   end
 
   # Fetches the truck data from the API
