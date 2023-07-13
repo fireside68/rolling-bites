@@ -27,3 +27,10 @@ main {
 .heading {
   color: #FFFFFF;
 }
+
+th, tr, td {
+  margin-right: 20px;
+  padding: 4px;
+  font-size: 24px;
+  /* width: 350px; */
+}
