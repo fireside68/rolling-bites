@@ -44,4 +44,42 @@ defmodule RollingBitesWeb.FoodTruckHelper do
   defp to_radians(degrees) do
     degrees * :math.pi() / 180
   end
+
+  def parse_schedule(schedule) do
+    # Define mapping from day abbreviations to full names
+    day_map = %{
+      "Mo" => "Monday",
+      "Tu" => "Tuesday",
+      "We" => "Wednesday",
+      "Th" => "Thursday",
+      "Fr" => "Friday",
+      "Sa" => "Saturday",
+      "Su" => "Sunday"
+    }
+
+    # Initialize map to store parsed schedule
+    parsed_schedule = %{
+      "Monday" => [],
+      "Tuesday" => [],
+      "Wednesday" => [],
+      "Thursday" => [],
+      "Friday" => [],
+      "Saturday" => [],
+      "Sunday" => []
+    }
+
+    # Split schedule into separate blocks
+    String.split(schedule, ";")
+    |> Enum.reduce(parsed_schedule, fn block, acc ->
+      # Split block into days and hours
+      [days, hours] = String.split(block, ":")
+      # Convert day abbreviations to full names
+      days = String.split(days, "/")
+      |> Enum.map(&Map.get(day_map, &1))
+      # Add hours to corresponding days in parsed schedule
+      Enum.reduce(days, acc, fn day, acc ->
+        Map.put(acc, day, [hours | Map.get(acc, day)])
+      end)
+    end)
+  end
 end
