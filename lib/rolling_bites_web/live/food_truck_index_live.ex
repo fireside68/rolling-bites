@@ -3,9 +3,7 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
 
   alias RollingBites.IPFetchServer
   alias RollingBites.SodaAPIServer
-  alias RollingBitesWeb.FoodTruckClient
   alias RollingBitesWeb.FoodTruckHelper
-  alias RollingBitesWeb.FoodTruckPresenter
 
   def mount(_params, _session, socket) do
     truck_data = SodaAPIServer.get_data()
@@ -21,8 +19,6 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
   end
 
   def handle_event("show_trucks", %{"name" => name}, socket) do
-    IO.inspect(Map.keys(socket.assigns))
-
     {:noreply,
      push_redirect(assign(socket, truck_data: socket.assigns.truck_data),
        to: "/trucks/show/#{name}"
@@ -73,7 +69,7 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
         data-latitude={@location.latitude}
         data-longitude={@location.longitude}
         phx-hook="IndexMap"
-        >
+      >
       </div>
     </section>
     <table>
@@ -91,13 +87,6 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
       </tbody>
     </table>
     """
-  end
-
-  # Fetches the truck data from the API
-  def fetch_data_and_map_to_presenter do
-    {:ok, data} = FoodTruckClient.fetch_all_data()
-
-    Enum.map(data, &FoodTruckPresenter.from_api_data/1)
   end
 
   def transform_data_for_index_table(data), do: data |> FoodTruckHelper.group_and_sort_trucks()
