@@ -1,12 +1,24 @@
 export function getUserLocation() {
-  if ("geolocation" in navigator) {
-    return new Promise((resolve, reject) => {
+  console.log("Getting user location..."); // Log the call
+
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        position => resolve({ latitude: position.coords.latitude, longitude: position.coords.longitude }),
-        error => reject(error)
+        position => {
+          console.log("User location found:", position); // Log the found location
+          resolve({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        error => {
+          console.log("Error getting location:", error); // Log any errors
+          reject(error);
+        }
       );
-    });
-  } else {
-    return Promise.reject(new Error("Geolocation is not supported by this browser."));
-  }
+    } else {
+      console.error("Geolocation is not supported by this browser."); // Log if browser does not support geolocation
+      reject(new Error("Geolocation is not supported by this browser."));
+    }
+  });
 }

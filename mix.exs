@@ -32,6 +32,7 @@ defmodule RollingBites.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bypass, "~> 2.1", only: :test},
       {:credo, "~> 1.0", only: [:dev, :test]},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:decimal, "~> 2.0"},
@@ -42,7 +43,7 @@ defmodule RollingBites.MixProject do
       {:ex_machina, "~> 2.0", only: :test},
       {:finch, "~> 0.13"},
       {:floki, ">= 0.30.0", only: :test},
-      {:geoip2, "~> 2.0"},
+      {:geoip, "~> 0.2"},
       {:gettext, "~> 0.20"},
       {:hound, "~> 1.0", only: :test},
       {:httpoison, "~> 1.0"},

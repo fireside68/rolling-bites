@@ -22,9 +22,13 @@ defmodule RollingBites.Application do
       # Start Finch
       {Finch, name: RollingBites.Finch},
       # Start the Endpoint (http/https)
-      RollingBitesWeb.Endpoint
+      RollingBitesWeb.Endpoint,
       # Start a worker by calling: RollingBites.Worker.start_link(arg)
       # {RollingBites.Worker, arg}
+      # Start worker to rerieve user location from IP
+      RollingBites.IPFetchServer,
+      # Start worker to retrieve data from SODA API
+      RollingBites.SodaAPIServer
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

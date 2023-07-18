@@ -29,6 +29,8 @@ config :rolling_bites, RollingBitesWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :rolling_bites, RollingBites.Mailer, adapter: Swoosh.Adapters.Local
 
+config :rolling_bites, :ipgeolocation_api_key, System.get_env("IPGEOLOCATION_API_KEY")
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
