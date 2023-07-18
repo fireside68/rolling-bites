@@ -23,8 +23,6 @@ config :rolling_bites, RollingBitesWeb.Endpoint,
 # In test we don't send emails.
 config :rolling_bites, RollingBites.Mailer, adapter: Swoosh.Adapters.Test
 
-config :rolling_bites, :http_client, RollingBitesWeb.HTTPClientMock
-
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
 

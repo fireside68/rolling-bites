@@ -1,10 +1,14 @@
 defmodule RollingBitesWeb.FoodTruckShowLive do
   use RollingBitesWeb, :live_view
-  alias RollingBitesWeb.FoodTruckIndexLive
+
+  alias RollingBites.SodaAPIServer
+  alias RollingBitesWeb.FoodTruckHelper
 
   def mount(%{"name" => name} = _params, _session, socket) do
     item =
-      Enum.find(FoodTruckIndexLive.fetch_items(), fn list_item ->
+      SodaAPIServer.get_data()
+      |> FoodTruckHelper.group_and_sort_trucks()
+      |> Enum.find(fn list_item ->
         list_item.name == URI.decode(name)
       end)
 

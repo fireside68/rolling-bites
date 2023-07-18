@@ -12,8 +12,8 @@ main {
   background-color: rgba(116, 132, 255, 0.6);
 }
 
-#map {
-  height: 500px;
+#map, #index-map {
+  height: 600px;
   width: 80vw;
 }
 
