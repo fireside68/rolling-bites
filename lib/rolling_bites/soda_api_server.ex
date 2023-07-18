@@ -37,6 +37,7 @@ defmodule RollingBites.SodaAPIServer do
 
   def base_url, do: Application.get_env(:rolling_bites, :soda_url)
   def http_client, do: Application.get_env(:rolling_bites, :http_client)
+
   defp headers() do
     soda_api_key = Application.get_env(:rolling_bites, :soda_api_key)
 
@@ -68,5 +69,4 @@ defmodule RollingBites.SodaAPIServer do
         {:error, "Failed to fetch data: #{inspect(error)}"}
     end
   end
-
 end
