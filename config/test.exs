@@ -6,10 +6,10 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :rolling_bites, RollingBites.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "rolling_bites_test#{System.get_env("MIX_TEST_PARTITION")}",
+  username: System.get_env("DB_USER"),
+  password: System.get_env("DB_PASS"),
+  hostname: System.get_env("HOSTNAME"),
+  database: "#{System.get_env("TEST_DATABASE")}#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 

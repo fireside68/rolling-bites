@@ -1,10 +1,8 @@
 # ---- Build Stage ----
-FROM elixir:1.14 as builder
+FROM elixir:1.15-alpine as builder
 
 # Install build dependencies
-RUN apt-get update && \
-    apt-get install -y build-essential npm git python3 && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache build-base npm git
 
 # Prepare build directory
 WORKDIR /app
@@ -34,9 +32,9 @@ COPY lib lib
 RUN mix do compile, release
 
 # ---- Application Stage ----
-FROM alpine:3.14 AS app
+FROM alpine:latest AS app
 
-RUN apk --no-cache add openssl ncurses-libs libstdc++
+RUN apk --no-cache add openssl ncurses-libs libstdc++ libgcc
 
 WORKDIR /app
 

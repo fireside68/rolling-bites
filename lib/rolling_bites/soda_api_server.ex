@@ -35,11 +35,10 @@ defmodule RollingBites.SodaAPIServer do
     Enum.map(data, &FoodTruckPresenter.from_api_data/1)
   end
 
-  def base_url, do: Application.get_env(:rolling_bites, :soda_url)
-  def http_client, do: Application.get_env(:rolling_bites, :http_client)
+  def base_url, do: System.get_env("SODA_URL")
 
   defp headers() do
-    soda_api_key = Application.get_env(:rolling_bites, :soda_api_key)
+    soda_api_key = System.get_env("SODA_API_KEY")
 
     [
       {"X-App-Token", "#{soda_api_key}"}
