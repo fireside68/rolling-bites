@@ -4,7 +4,7 @@ import Config
 config :rolling_bites, RollingBites.Repo,
   username: System.get_env("DB_USER"),
   password: System.get_env("DB_PASS"),
-  hostname: System.get_env("HOSTNAME"),
+  hostname: "localhost",
   database: System.get_env("DEV_DATABASE"),
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
@@ -19,7 +19,7 @@ config :rolling_bites, RollingBites.Repo,
 config :rolling_bites, RollingBitesWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {0, 0, 0, 0}, port: 4000],
+  http: [ip: {127, 0, 0, 1}, port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
@@ -74,9 +74,6 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
-
-# Config for HTTP Client
-config :rolling_bites, :http_client, HTTPoison
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
