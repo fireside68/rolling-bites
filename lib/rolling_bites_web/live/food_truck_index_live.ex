@@ -25,6 +25,19 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
      )}
   end
 
+  def handle_event("filter_trucks", %{"value" => search_query}, socket) do
+    filtered_trucks =
+      case String.trim(search_query) do
+        "" -> socket.assigns.truck_data # Show all trucks when the search query is empty
+        query -> filter_trucks_by_name(socket.assigns.truck_data, query)
+      end
+
+    truck_points = get_truck_points(filtered_trucks)
+    socket = push_event(socket, "update_trucks", %{trucks: truck_points})
+
+    {:noreply, assign(socket, trucks: truck_points)}
+  end
+
   def handle_event("got_location", %{"latitude" => lat, "longitude" => lon}, socket) do
     location = %{latitude: lat, longitude: lon}
 
@@ -62,7 +75,7 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
 
   def render(assigns) do
     ~H"""
-    <section id="indexMapContainer" phx-hook="GetLocation">
+    <section id="indexMapContainer" phx-hook="GetLocation" class="ml-16">
       <div
         id="index-map"
         data-trucks={Jason.encode!(@trucks)}
@@ -71,21 +84,32 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
         phx-hook="IndexMap"
       >
       </div>
+      <caption>The ten closest food truck entities to your location</caption>
     </section>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= for item <- @items do %>
-          <tr phx-click="show_trucks" phx-value-name={item.name}>
-            <td><%= item.name %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <section id="trucks-container" class="m-16 lg:w-auto">
+      <div class="list-container">
+        <div class="list-header-container">
+          <p>Truckspotting displays the ten closest food truck entities to your location in the map above.
+            Below is a list of food truck applicants--some have multiple entities. Use the search bar to search
+            through the applicants.</p>
+        </div>
+        <div class="search-container p-16">
+          <input type="text" phx-keyup="filter_trucks" phx-target="filter-form" placeholder="Search for trucks...">
+        </div>
+        <div class="cards-container">
+          <%= for item <- @items do %>
+            <div class="truck-card" phx-click="show_trucks" phx-value-name={item.name}>
+              <div class="truck-icon-container">
+                <i class="fa-solid fa-truck"></i>
+              </div>
+              <div class="truck-name">
+                <%= item.name %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
     """
   end
 
@@ -125,6 +149,12 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
         "longitude" => truck.longitude,
         "name" => truck.name
       }
+    end)
+  end
+
+  defp filter_trucks_by_name(truck_data, query) do
+    Enum.filter(truck_data, fn truck ->
+      String.contains?(String.downcase(truck.name), String.downcase(query))
     end)
   end
 end

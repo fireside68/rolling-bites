@@ -17,13 +17,13 @@ defmodule RollingBitesWeb.Router do
   scope "/", RollingBitesWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    # get "/", PageController, :home
     get "/food_trucks", RollingBitesController, :index
     get "/food_trucks/:name", RollingBitesController, :show
 
     live "/trucks/show/:name", FoodTruckShowLive
     live "/trucks/detail", FoodTruckDetailLive
-    live "/trucks", FoodTruckIndexLive
+    live "/", FoodTruckIndexLive
   end
 
   # Other scopes may use custom stacks.
