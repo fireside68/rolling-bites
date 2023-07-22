@@ -76,7 +76,7 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
       <%= for item <- @items do %>
         <div class="truck-card" phx-click="show_trucks" phx-value-name={item.name}>
           <div class="truck-icon-container">
-            <i class="truck-icon"></i>
+            <i class="fa-solid fa-truck"></i>
           </div>
           <div class="truck-name">
             <%= item.name %>
