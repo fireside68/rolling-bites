@@ -25,6 +25,19 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
      )}
   end
 
+  def handle_event("filter_trucks", %{"value" => search_query}, socket) do
+    filtered_trucks =
+      case String.trim(search_query) do
+        "" -> socket.assigns.truck_data # Show all trucks when the search query is empty
+        query -> filter_trucks_by_name(socket.assigns.truck_data, query)
+      end
+
+    truck_points = get_truck_points(filtered_trucks)
+    socket = push_event(socket, "update_trucks", %{trucks: truck_points})
+
+    {:noreply, assign(socket, trucks: truck_points)}
+  end
+
   def handle_event("got_location", %{"latitude" => lat, "longitude" => lon}, socket) do
     location = %{latitude: lat, longitude: lon}
 
@@ -72,17 +85,22 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
       >
       </div>
     </section>
-    <div class="cards-container">
-      <%= for item <- @items do %>
-        <div class="truck-card" phx-click="show_trucks" phx-value-name={item.name}>
-          <div class="truck-icon-container">
-            <i class="fa-solid fa-truck"></i>
+    <div class="list-container">
+      <div class="search-container">
+        <input type="text" phx-keyup="filter_trucks" phx-target="filter-form" placeholder="Search for trucks...">
+      </div>
+      <div class="cards-container">
+        <%= for item <- @items do %>
+          <div class="truck-card" phx-click="show_trucks" phx-value-name={item.name}>
+            <div class="truck-icon-container">
+              <i class="fa-solid fa-truck"></i>
+            </div>
+            <div class="truck-name">
+              <%= item.name %>
+            </div>
           </div>
-          <div class="truck-name">
-            <%= item.name %>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
     """
   end
@@ -123,6 +141,12 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
         "longitude" => truck.longitude,
         "name" => truck.name
       }
+    end)
+  end
+
+  defp filter_trucks_by_name(truck_data, query) do
+    Enum.filter(truck_data, fn truck ->
+      String.contains?(String.downcase(truck.name), String.downcase(query))
     end)
   end
 end

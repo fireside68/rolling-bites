@@ -33,6 +33,29 @@ let liveSocket = new LiveSocket("/live", Socket, {
   }
 })
 
+document.addEventListener("DOMContentLoaded", () => {
+  const filterForm = document.querySelector('[phx-target="filter-form"]');
+
+  filterForm.addEventListener("keyup", (event) => {
+    event.preventDefault();
+    const query = event.target.value.trim();
+    filterTrucks(query);
+  });
+
+  function filterTrucks(query) {
+    const truckCards = document.querySelectorAll(".truck-card");
+    truckCards.forEach((card) => {
+      const truckName = card.querySelector(".truck-name").innerText.toLowerCase();
+      if (truckName.includes(query.toLowerCase())) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+});
+
+
 // Show progress bar on live navigation and form submits
 topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" })
 window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
