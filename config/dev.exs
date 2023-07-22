@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :rolling_bites, RollingBites.Repo,
-  username: System.get_env("DB_USER"),
-  password: System.get_env("DB_PASS"),
+  username: "postgres",
+  password: "postgres",
   hostname: "localhost",
-  database: System.get_env("DEV_DATABASE"),
+  database: "rolling_bites_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
