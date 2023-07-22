@@ -25,13 +25,13 @@ RUN cd assets && \
     npm install && \
     npm run deploy
 COPY priv priv
+COPY lib lib
 RUN mix assets.deploy
 
 # Generate release
 RUN mix phx.gen.release --ecto
 
 # Compile the project
-COPY lib lib
 RUN mix do compile, release
 
 # ---- Application Stage ----
@@ -54,15 +54,3 @@ ENV PHX_SERVER=true
 ENV PHX_HOST=localhost
 
 CMD ["bin/rolling_bites", "start"]
-
-# Appended by flyctl
-ENV ECTO_IPV6 true
-ENV ERL_AFLAGS "-proto_dist inet6_tcp"
-
-# Appended by flyctl
-ENV ECTO_IPV6 true
-ENV ERL_AFLAGS "-proto_dist inet6_tcp"
-
-# Appended by flyctl
-ENV ECTO_IPV6 true
-ENV ERL_AFLAGS "-proto_dist inet6_tcp"
