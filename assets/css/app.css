@@ -72,3 +72,14 @@ th, tr, td {
 .truck-name {
   font-size: 16px;
 }
+
+@media only screen and (max-width: 640px) {
+  h1 {
+    font-size: 48px;
+  }
+
+  #big-header {
+    height: 100px;
+    padding-top: 8px;
+  }
+}
