@@ -82,4 +82,8 @@ th, tr, td {
     height: 100px;
     padding-top: 8px;
   }
+
+  .hidden {
+    display: none;
+  }
 }
