@@ -55,6 +55,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Select menu button
+const menuButton = document.querySelector('.block.lg\\:hidden button');
+
+// Select menu
+const menu = document.querySelector('#menu');
+
+// Define a function to check screen size
+function checkScreenSize() {
+  const screenWidth = window.innerWidth;
+
+  // Assume 1024px as the breakpoint for large screens, adjust as needed
+  if (screenWidth <= 1024) {
+    menu.classList.remove('hidden');
+  } else {
+    menu.classList.add('hidden');
+  }
+}
+
+// Run the function when the window is resized
+window.addEventListener('resize', checkScreenSize);
+
+// Run the function when the document is loaded
+document.addEventListener('DOMContentLoaded', checkScreenSize);
+
+// Add event listener for click, but only toggle menu if it's not a large screen
+menuButton.addEventListener('click', function() {
+  if (window.innerWidth <= 1024) {
+    menu.classList.toggle('hidden');
+  }
+});
+
+
 
 // Show progress bar on live navigation and form submits
 topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" })

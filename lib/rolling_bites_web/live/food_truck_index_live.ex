@@ -73,46 +73,6 @@ defmodule RollingBitesWeb.FoodTruckIndexLive do
     {:noreply, socket}
   end
 
-  def render(assigns) do
-    ~H"""
-    <section id="indexMapContainer" phx-hook="GetLocation" class="ml-16">
-      <div
-        id="index-map"
-        data-trucks={Jason.encode!(@trucks)}
-        data-latitude={@location.latitude}
-        data-longitude={@location.longitude}
-        phx-hook="IndexMap"
-      >
-      </div>
-      <caption>The ten closest food truck entities to your location</caption>
-    </section>
-    <section id="trucks-container" class="m-16 lg:w-auto">
-      <div class="list-container">
-        <div class="list-header-container">
-          <p>Truckspotting displays the ten closest food truck entities to your location in the map above.
-            Below is a list of food truck applicants--some have multiple entities. Use the search bar to search
-            through the applicants.</p>
-        </div>
-        <div class="search-container p-16">
-          <input type="text" phx-keyup="filter_trucks" phx-target="filter-form" placeholder="Search for trucks...">
-        </div>
-        <div class="cards-container">
-          <%= for item <- @items do %>
-            <div class="truck-card" phx-click="show_trucks" phx-value-name={item.name}>
-              <div class="truck-icon-container">
-                <i class="fa-solid fa-truck"></i>
-              </div>
-              <div class="truck-name">
-                <%= item.name %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </section>
-    """
-  end
-
   def transform_data_for_index_table(data), do: data |> FoodTruckHelper.group_and_sort_trucks()
 
   def fetch_closest_trucks(data, user_location) do
