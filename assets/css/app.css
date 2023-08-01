@@ -12,9 +12,16 @@ main {
   background-color: rgba(116, 132, 255, 0.6);
 }
 
-#map, #index-map {
-  height: 600px;
-  width: 80vw;
+#indexMapContainer {
+  height: 100%;
+  width: 100%;
+  margin-right: 32px;
+}
+
+#map,
+#index-map {
+  height: 50vw;
+  width: 100%;
 }
 
 #big-header {
@@ -28,7 +35,9 @@ main {
   color: #FFFFFF;
 }
 
-th, tr, td {
+th,
+tr,
+td {
   margin-right: 20px;
   padding: 4px;
   font-size: 24px;
@@ -57,7 +66,6 @@ th, tr, td {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: #fd4f00;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,16 +74,31 @@ th, tr, td {
 
 .truck-icon {
   color: white;
-  font-size: 24px;
 }
 
 .truck-name {
   font-size: 16px;
 }
 
+@media only screen and (min-width: 640px) {
+  .truck-icon-container {
+    background-color: #fd4f00;
+  }
+
+  .truck-icon {
+    font-size: 24px;
+  }
+}
+
 @media only screen and (max-width: 640px) {
   h1 {
     font-size: 48px;
+  }
+
+  #map,
+  #index-map {
+    height: 90vw;
+    width: 100vw;
   }
 
   #big-header {
@@ -85,5 +108,18 @@ th, tr, td {
 
   .hidden {
     display: none;
+  }
+
+  .truck-card {
+    width: 190px;
+    height: 65px;
+  }
+
+  .truck-icon {
+    font-size: 18px;
+  }
+
+  .truck-name {
+    font-size: 14px;
   }
 }
