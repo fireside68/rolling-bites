@@ -9,7 +9,16 @@ defmodule RollingBites.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "Rolling Bites",
+      source_url: "https://github.com/fireside68/rolling-bites",
+      homepage_url: "https://rolling-bites.fly.dev/",
+      docs: [
+        main: "RollingBites",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -40,6 +49,7 @@ defmodule RollingBites.MixProject do
       {:ecto_sql, "~> 3.0"},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:excoveralls, "~> 0.0", only: :test},
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:ex_machina, "~> 2.0", only: :test},
       {:finch, "~> 0.13"},
       {:floki, ">= 0.30.0", only: :test},
