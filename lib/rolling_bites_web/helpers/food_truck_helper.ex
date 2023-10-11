@@ -45,7 +45,17 @@ defmodule RollingBitesWeb.FoodTruckHelper do
     degrees * :math.pi() / 180
   end
 
-  def parse_schedule(nil), do: %{}
+  def parse_schedule(nil) do
+    %{
+      "Monday" => ["9AM-5PM"],
+      "Tuesday" => ["9AM-5PM"],
+      "Wednesday" => ["9AM-5PM"],
+      "Thursday" => ["9AM-5PM"],
+      "Friday" => ["9AM-5PM"],
+      "Saturday" => [],
+      "Sunday" => []
+    }
+  end
 
   def parse_schedule(schedule) do
     # Define mapping from day abbreviations to full names
