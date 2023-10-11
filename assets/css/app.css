@@ -12,10 +12,72 @@ main {
   background-color: rgba(116, 132, 255, 0.6);
 }
 
+/* Ensure the entire page takes up the full viewport height and is centered */
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  /* You can use any desired font family */
+}
+
+/* Style for the container holding the two panels */
+.split-view {
+  display: flex;
+  /* Enables flex layout */
+  height: 100%;
+  /* Ensures full height */
+}
+
+/* Left panel styling */
+.left-panel {
+  flex: 0.4;
+  /* Takes up 40% of the parent's width */
+  background-color: #f4f4f4;
+  /* Just a sample background color */
+  padding: 20px;
+  /* Adds some padding around content */
+  box-sizing: border-box;
+  /* Ensures padding doesn't increase the width */
+}
+
+/* Right panel styling */
+.right-panel {
+  flex: 0.6;
+  /* Takes up 60% of the parent's width */
+  background-color: #e1e1e1;
+  /* Just a sample background color */
+  padding: 20px;
+  /* Adds some padding around content */
+  box-sizing: border-box;
+  /* Ensures padding doesn't increase the width */
+}
+
+/* Sample styling for other elements, adjust as needed */
+.header,
+.footer {
+  padding: 15px;
+  background-color: #333;
+  color: #fff;
+}
+
+.logo {
+  font-weight: bold;
+  color: #FD4F00;
+}
+
+.filters,
+.user-actions {
+  margin-bottom: 15px;
+}
+
+
 #indexMapContainer {
   height: 100%;
   width: 100%;
   margin-right: 32px;
+  max-height: 600px;
+  overflow: hidden;
 }
 
 #map,
@@ -48,6 +110,9 @@ td {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  max-height: 600px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .truck-card {
@@ -91,8 +156,26 @@ td {
 }
 
 @media only screen and (max-width: 640px) {
+  .split-view {
+    flex-direction: column;
+  }
+
+  .left-panel,
+  .right-panel {
+    flex: none;
+    width: 100%;
+  }
+
+  .left-panel {
+    order: 2;
+  }
+
+  .right-panel {
+    order: 1;
+  }
+
   h1 {
-    font-size: 48px;
+    font-size: 44px;
   }
 
   #map,
@@ -122,4 +205,28 @@ td {
   .truck-name {
     font-size: 14px;
   }
+}
+
+/* For WebKit browsers like Chrome, Safari */
+.cards-container::-webkit-scrollbar {
+  width: 8px;
+  /* width of the entire scrollbar */
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+  background-color: #FD4F00;
+  /* color of the scroll thumb */
+  border-radius: 4px;
+  /* roundness of the scroll thumb */
+}
+
+.cards-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* color of the track */
+}
+
+/* For Firefox */
+.cards-container {
+  scrollbar-width: thin;
+  scrollbar-color: #FD4F00 #f1f1f1;
 }
