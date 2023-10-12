@@ -43,3 +43,6 @@ npm-debug.log
 .elixir_ls/
 .env
 node_modules/
+
+# ASDF Postgres logfile
+logfile
