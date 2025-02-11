@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/fireside68/rolling-bites#readme",
   "devDependencies": {
-    "esbuild": "^0.18.10"
+    "esbuild": "^0.25.0"
   },
   "dependencies": {
     "leaflet": "^1.7.1",
